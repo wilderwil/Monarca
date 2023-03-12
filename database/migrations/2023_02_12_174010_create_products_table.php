@@ -22,6 +22,10 @@ return new class extends Migration
             $table->integer('alert');
             $table->string('image',255)->nullable();
             $table->unsignedBigInteger('category_id');
+            $table->integer('size');
+            $table->string('color',50);
+            $table->string('placa',50);
+            $table->string('features',255);
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

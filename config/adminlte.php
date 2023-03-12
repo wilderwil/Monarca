@@ -330,36 +330,33 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'multilevel',
+            'text'    => 'Administrador',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Categorias',
+                     #'url'  => '#',
+                    'can' => 'admin.categories.index',
+                    'route'  => 'admin.categories.index',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Productos',
+                     #'url'  => '#',
+                    'can' => 'admin.products.index',
+                    'route'  => 'admin.products.index',
+                ],
+                [
+                    'text' => 'Roles',
+                     #'url'  => '#',
+                    'can' => 'admin.roles.index',
+                    'route'  => 'admin.roles.index',
+                ],
+                [
+                    'text'    => 'Users',
+                    'can' => 'admin.users.index',
+                    'route'  => 'admin.users.index',
+
+
                 ],
                 [
                     'text' => 'level_one',
