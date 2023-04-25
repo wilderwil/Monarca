@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('color',50);
             $table->string('placa',50);
             $table->string('features',255);
+            $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
