@@ -312,6 +312,41 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text'    => 'Ventas',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Hacer Venta',
+                     #'url'  => '#',
+                   # 'can' => 'admin.pos.index',
+                    'route'  => 'pos',
+                ],
+                [
+                    'text' => 'Reporte por fechas',
+                     #'url'  => '#',
+                   # 'can' => 'admin.pos.index',
+                    'route'  => 'pos-report',
+                ],
+            ]
+            ],
+            [
+                'text'    => 'Créditos',
+                'icon'    => 'fas fa-fw fa-share',
+                'submenu' => [
+                    [
+                        'text' => 'Listado de Vencidos',
+                         #'url'  => '#',
+                       # 'can' => 'admin.pos.index',
+                        'route'  => 'vencidos',
+                    ],[
+                        'text' => 'Listado de pendientes',
+                         #'url'  => '#',
+                       # 'can' => 'admin.pos.index',
+                        'route'  => 'pendientes',
+                    ],
+                ]
+                ],
+        [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
@@ -355,6 +390,13 @@ return [
                     'text'    => 'Users',
                     'can' => 'admin.users.index',
                     'route'  => 'admin.users.index',
+
+
+                ],
+                [
+                    'text'    => 'Clientes',
+                    'can' => 'admin.clients.index',
+                    'route'  => 'admin.clients.index',
 
 
                 ],
