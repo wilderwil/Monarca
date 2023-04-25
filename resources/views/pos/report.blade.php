@@ -5,9 +5,9 @@
 
 
 @section('content')
-@livewire('pos.search-client')
-    @livewire('pos.search')
-    @livewire('pos.pos')
+
+
+    @livewire('pos.report')
 
 @stop
 @livewireScripts

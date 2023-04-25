@@ -11,4 +11,9 @@ class PosController extends Controller
 
         return view('pos.index');
     }
+    public function report()
+    {
+
+        return view('pos.report');
+    }
 }
