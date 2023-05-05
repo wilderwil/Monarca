@@ -12,9 +12,10 @@ use Livewire\WithPagination;
 use DB;
 class InstallmentPending extends Component
 {
+    use WithPagination;
     public $start_date,$end_date,$search,$componentName, $pageTitle,$creditId,$details=[],$sumTotalDetails,$sumAmountDetails,$installmentId,$installmentDetail,$numInstallments,$totalInstallment,$montoPago;
-    private $pagination = 5;
-    #protected $paginationTheme ='bootstrap';
+    private $pagination = 15;
+    protected $paginationTheme ='bootstrap';
 
      public function mount(){
         $this->componentName = "Cuotas Pendientes";
@@ -79,7 +80,7 @@ $installments_pending = Credit::select('installments.id as installmentid','total
         ->where('estado','pendiente')
         ->whereDate('expiration_date','>=',$this->start_date)
         ->whereDate('expiration_date','<=',$this->end_date)
-        ->groupBy('installments.id','credits.total_amount','installments.amount','credits.id','clients.nombre','clients.apellido','expiration_date','clients.cel')->get();
+        ->groupBy('installments.id','credits.total_amount','installments.amount','credits.id','clients.nombre','clients.apellido','expiration_date','clients.cel')->paginate($this->pagination);
 /* cuotas vencidas
 $installments = Credit::select('installments.id as installmentid','total_amount','amount','credits.id',\DB::raw("SUM(payment_installments.amount_paid) as total"),\DB::raw("CONCAT(clients.nombre, ' ', clients.apellido) as nombre"),'expiration_date','clients.cel')
         ->leftJoin('installments','credits.id' ,'=', 'installments.credit_id')

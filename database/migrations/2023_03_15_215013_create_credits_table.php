@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('venta_id')->references('id')->on('sales');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

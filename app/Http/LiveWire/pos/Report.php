@@ -13,6 +13,8 @@ use App\Models\PaymentInstallment;
 use App\Models\Installment;
 use Livewire\WithPagination;
 use DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class Report extends Component
 {
@@ -34,8 +36,11 @@ class Report extends Component
     }
     public function render()
     {
+        #dd(Auth()->user()->givePermissionTo('admin.delete.sale'));
+        #$permission = Permission::create(['name' => 'delete sale','description'=>'Borrar ventas']);die;
 
         $sales  = Sale::orderBy('id','desc')->whereBetween('date', [$this->start_date, $this->end_date])->paginate($this->pagination);
+        #dd($sales->user);
         return view('livewire.pos.report',compact('sales'));
     }
     public function getDetails($saleId){
@@ -53,5 +58,48 @@ class Report extends Component
 
     }
 
+    public function deleteSale($saleId){
 
+        DB::beginTransaction();
+
+        try {
+            $sale = Sale::find($saleId);
+            if(strcmp($sale->tipo,'crédito') == 0){
+            $details = SaleDetail::select(['id','product_id','quantity'])->where('sale_id',$saleId)->get();
+            # dd($details);
+            if($details){
+                foreach($details as $detail){
+                    $product = product::find($detail->product_id);
+                    $product->update([
+                        'stock'=>$product->stock + $detail->quantity,
+                    ]);
+                    $detail->delete();
+                    //ojo guardar en log
+                }
+                Sale::find($saleId);
+            }
+            $credit = Credit::select('id')->where('venta_id',$saleId)->get();
+            //Buscar cuotas asociadas al credito para borrarlas
+            $installments = Credit::find($credit[0]->id)->installments;
+            foreach ($installments as $installment){
+                //buscar los pagos asociados a las cuotas para borrarlos
+                    foreach ($installment->paymentsInstallment as $paymentInstallment) {
+                        $paymentInstallment->delete();
+                        # code...
+                    }
+                    $installment->delete();
+            }
+            $credit[0]->delete();
+
+        }
+        $sale->delete();
+        DB::commit();
+            $this->emit('delete-sale','Se ha eliminado la venta: '. $saleId);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            $this->emit('delete-error ',$th->getMessage());
+        }
+
+
+    }
 }

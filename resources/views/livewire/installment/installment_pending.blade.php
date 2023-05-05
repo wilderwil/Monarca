@@ -132,7 +132,7 @@
                         </tfoot>
                         </thead>
                     </table>
-
+                    {{$installments_pending->links()}}
                 </div>
             </div>
         </div>

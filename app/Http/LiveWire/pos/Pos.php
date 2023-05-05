@@ -14,13 +14,13 @@ use App\Models\Installment;
 use DB;
 class Pos extends Component
 {
-    public $total,$itemsQuantity,$tipo_venta,$search,$cuotas,$periodo,$inicial,$client,$client_name,$client_image, $client_rif;
+    public $total,$itemsQuantity,$tipo_venta,$search,$cuotas,$periodo,$inicial,$client,$client_name,$client_image, $client_rif,$fecha;
     protected $listeners = ['removeItem'=>'removeItem','clearCart'=>'clearCart','saveSale'=>'saveSale','addToCart'=>'addToCart','addClientToCart'=>'addClientToCart'];
     public function mount(){
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->tipo_venta = 'contado';
-
+        $this->fecha =  date('Y-m-d');
 
 
     }
@@ -177,7 +177,7 @@ class Pos extends Component
         try {
             $sale = Sale::create([
                 'client_id'=>$this->client,
-                'date'=> now(),
+                'date'=> $this->fecha,
                 'total'=>$this->total,
                 'tipo' =>$this->tipo_venta,
                 'user_id'=>Auth()->user()->id,
@@ -197,7 +197,7 @@ class Pos extends Component
                     $product->save();
                 }
                 if($this->tipo_venta == 'crédito'){
-                    $hoy = date('Y-m-d');
+                    $hoy = $this->fecha;
                     $nueva_fecha = date('Y-m-d', strtotime($hoy . ' +1 day'));
                     $monto_credito = Cart::getTotal();
                     $installment_amount = ($monto_credito - $this->inicial ) / $this->cuotas;
@@ -287,7 +287,8 @@ class Pos extends Component
         return $fechas_vencimiento;
         */
         $fechas_vencimiento = array();
-        $hoy = date('Y-m-d');
+        #$hoy = date('Y-m-d');
+        $hoy = $this->fecha;
         $fecha_actual = date('Y-m-d', strtotime($hoy . ' +1 day'));
         for ($i=0; $i<$num_cuotas; $i++) {
             if ($periodo == 'diario') {
