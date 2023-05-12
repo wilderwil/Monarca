@@ -4,9 +4,8 @@
 
 
 
-@section('content')
-    @livewire('admin.categories')
-
+@section('content') 
+@livewire('admin.categories') 
 
 @stop
 @livewireScripts
