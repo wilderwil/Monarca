@@ -49,11 +49,15 @@
 
                         </div>
                         <div class="col-sm-12 col-md-10 ">
+                            <div id="div-alert">
+
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-stripe mt-1">
                                     <thead class="text-white" style="background:#3b3f5c;">
                                         <tr>
                                             <th class="table-th text-white">N°</th>
+                                            <th class="table-th text-white">Cliente</th>
                                             <th class="table-th text-white">Fecha</th>
                                             <th class="table-th text-white">Total</th>
                                             <th class="table-th text-white">Tipo</th>
@@ -75,6 +79,9 @@
                                                         <h6>{{ $sale->id }}</h6>
                                                     </td>
                                                     <td>
+                                                        <h6>{{ $sale->client->nombre}} {{$sale->client->apellido }}</h6>
+                                                    </td>
+                                                    <td>
                                                         <h6>{{ \Carbon\Carbon::parse($sale->date)->format('d-m-Y') }}
                                                         </h6>
                                                     </td>
@@ -93,9 +100,13 @@
                                                             title="Ver"
                                                             wire:click.prevent="getDetails({{ $sale->id }})"><i
                                                                 class="fa fa-eye"></i></a>
+                                                                @can('delete sale')
+                                                                <a href="javascript:void(0)" class="btn btn-dark mtmobile show-confirm"
+                                                            title="Borrar"
+                                                            wire:click.prevent="deleteSale({{ $sale->id }})"><i
+                                                                class="fa fa-trash"></i></a>
 
-
-
+                                                                                                                    @endrole
                                                     </td>
 
 
@@ -126,5 +137,18 @@
         Livewire.on('showModal', msg => {
             $("#modalDetails").modal('show');
         });
+        Livewire.on('delete-sale', msg => {
+
+        if(!confirm('Estas seguro de borrar esta venta?')) {
+            e.preventDefault();
+        }
+
+            alertText =
+                `<x-adminlte-alert class="bg-danger text-uppercase"  icon="fa fa-lg fa-thumbs-up" title="Hecho" dismissable> ` +
+                msg + `!</x-adminlte-alert>`;
+            $("#div-alert").html(alertText)
+            $("#modalInstallmentsDetails").modal('hide');
+        });
     });
+
 </script>

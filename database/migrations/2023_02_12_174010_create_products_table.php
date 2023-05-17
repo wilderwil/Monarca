@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -40,5 +41,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
+
+
     }
 };

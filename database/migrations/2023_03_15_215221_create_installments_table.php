@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->foreign('credit_id')->references('id')->on('credits');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
