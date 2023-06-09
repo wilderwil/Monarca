@@ -91,10 +91,6 @@
                 <x-adminlte-button wire:click.prevent="saveSale()" class="btn-flat" type="submit" label="Guardar" theme="success" icon="fas fa-lg fa-save"/>
 
             </div>
-            <div class="row">
-                <a class="btn btn-primary" target="_blank" href="/download-pdf/123">Download</a>
-
-            </div>
             <div>
 
             </div>
