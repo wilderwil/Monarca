@@ -23,6 +23,10 @@ class Pos extends Component
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->tipo_venta = 'contado';
         $this->fecha =  date('Y-m-d');
+<<<<<<< HEAD:app/Http/Livewire/pos/Pos.php
+
+=======
+>>>>>>> acd4b744f642cd372203cdede5602a3031b6ff43:app/Http/LiveWire/pos/Pos.php
 
 
     }
@@ -224,9 +228,9 @@ class Pos extends Component
                             ]);
 
                         }
-                    foreach($fechas_vencimiento as $key => $fecha){
+                    foreach($fechas_vencimiento as $key => $fechas){
                         $installment = Installment::create([
-                            'expiration_date' => $fecha,
+                            'expiration_date' => $fechas,
                             'amount'=>$installment_amount,
                             'estado'=>'pendiente',
                             'credit_id'=> $credit->id,
@@ -291,7 +295,10 @@ class Pos extends Component
         return $fechas_vencimiento;
         */
         $fechas_vencimiento = array();
+<<<<<<< HEAD:app/Http/Livewire/pos/Pos.php
+=======
         #$hoy = date('Y-m-d');
+>>>>>>> acd4b744f642cd372203cdede5602a3031b6ff43:app/Http/LiveWire/pos/Pos.php
         $hoy = $this->fecha;
         $fecha_actual = date('Y-m-d', strtotime($hoy . ' +1 day'));
         for ($i=0; $i<$num_cuotas; $i++) {

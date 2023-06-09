@@ -1,6 +1,5 @@
 <div class="pt-3">
-
-    <x-adminlte-card title="Resumen de Venta" theme="dark" icon="fas fa-lg fa-thumbs-upfa-thumbs-up" collapsible  maximizable>
+ <x-adminlte-card title="Resumen de Venta" theme="dark" icon="fas fa-lg fa-thumbs-upfa-thumbs-up" collapsible  maximizable>
         <div class="task-header">
             <div class="row">
                 <div class="col-md-6">
@@ -28,5 +27,4 @@
         </div>
         </div>
     </x-adminlte-card>
-
 </div>

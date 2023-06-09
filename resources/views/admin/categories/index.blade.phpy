@@ -1,0 +1,10 @@
+@extends('adminlte::page')
+@livewireStyles
+@section('title', 'Dashboard')
+
+
+
+@section('content') 
+echo "llego";
+@stop
+@livewireScripts
