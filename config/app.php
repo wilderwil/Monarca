@@ -214,4 +214,7 @@ return [
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ])->toArray(),
 
+    Barryvdh\DomPDF\ServiceProvider::class,
+'PDF'       => Barryvdh\DomPDF\Facade::class,
+
 ];

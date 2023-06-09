@@ -11,11 +11,13 @@ use App\Models\SaleDetail;
 use App\Models\Credit;
 use App\Models\PaymentInstallment;
 use App\Models\Installment;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App;
 use DB;
 class Pos extends Component
 {
-    public $total,$itemsQuantity,$tipo_venta,$search,$cuotas,$periodo,$inicial,$client,$client_name,$client_image, $client_rif,$fecha;
-    protected $listeners = ['removeItem'=>'removeItem','clearCart'=>'clearCart','saveSale'=>'saveSale','addToCart'=>'addToCart','addClientToCart'=>'addClientToCart'];
+    public $total,$itemsQuantity,$tipo_venta,$search,$cuotas,$periodo,$inicial,$client,$client_name,$client_image, $client_rif,$fecha,$creditDetails,$sumAmountDetails,$sumTotalDetails;
+    protected $listeners = ['removeItem'=>'removeItem','clearCart'=>'clearCart','saveSale'=>'saveSale','addToCart'=>'addToCart','addClientToCart'=>'addClientToCart','generate-pdf'=>'generatePdf'];
     public function mount(){
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
@@ -26,6 +28,7 @@ class Pos extends Component
     }
     public function render()
     {
+
 
         $cart = Cart::getContent()->sortBy('name');
         return view('livewire.pos.pos',compact('cart'));
@@ -237,6 +240,7 @@ class Pos extends Component
             $this->resetUI();
 
             $this->emit('sale-ok','venta registrada con exito');
+            return to_route('download-pdf',['id'=>$credit]);
         } catch (\Throwable $th) {
             DB::rollback();
             $this->emit('sale-error ',$th->getMessage());
@@ -307,6 +311,36 @@ class Pos extends Component
         }
         return $fechas_vencimiento;
     }
+    public function generatePdf($id){
+        $credit=Credit::find($id);
+        $sale = Sale::find($credit->venta_id);
+        $data['sale']=$sale;
+        $saleDetails = SaleDetail::where(['sale_id'=>$sale->id])->get();
+        $data['saleDetails']= $saleDetails;
+       # dd($saleDetail);
+        $pdf = App::make('dompdf.wrapper');
+        $data['creditId']=$id;
+        $data['creditDetails'] = Credit::select('installments.id as installmentid','total_amount','amount','credits.id',\DB::raw("SUM(payment_installments.amount_paid) as total"),\DB::raw("CONCAT(clients.nombre, ' ', clients.apellido) as nombre"),'expiration_date','clients.cel','clients.cedula')
+        ->leftJoin('installments','credits.id' ,'=', 'installments.credit_id')
+        ->leftJoin('payment_installments','installments.id','=','payment_installments.installment_id')
+        ->leftJoin('sales','credits.venta_id','=','sales.id')
+        ->leftJoin('clients','sales.client_id','=','clients.id')
+    //    ->where('estado','pendiente')
+        ->where('credits.id',$id)
+        ->groupBy('installments.id','credits.total_amount','installments.amount','credits.id','clients.nombre','clients.apellido','expiration_date','clients.cel','clients.cedula')
+        ->orderBy('installments.id')->get();
+        //genera el consecutivo desde 1..n para las cuotas
+
+        //$this->countDetails = $this->details->sum('quantity');
+        $data['sumAmountDetails'] = $data['creditDetails']->sum('amount');
+        $data['sumTotalDetails'] = $data['creditDetails']->sum('total');
+        #$pdf->loadHTML('<h1>Test</h1>'.$id);
+        $pdf->loadView('livewire.pos.pdf', $data);
+        #dd($pdf);
+        return $pdf->download('test.pdf');
+        #return $pdf->stream();
+    }
+
 
 
 
