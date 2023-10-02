@@ -292,12 +292,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
+            'type' => 'navbar-search',
+            'text' => 'search',
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -308,120 +308,134 @@ return [
         ],
         [
             'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'url' => 'admin/blog',
+            'can' => 'manage-blog',
         ],
         [
-            'text'    => 'Ventas',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Socios',
+            'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Hacer Venta',
-                     #'url'  => '#',
-                   # 'can' => 'admin.pos.index',
-                    'route'  => 'pos',
-                ],
-                [
-                    'text' => 'Reporte por fechas',
-                     #'url'  => '#',
-                   # 'can' => 'admin.pos.index',
-                    'route'  => 'pos-report',
-                ],
-            ]
-            ],
-            [
-                'text'    => 'Créditos',
-                'icon'    => 'fas fa-fw fa-share',
-                'submenu' => [
-                    [
-                        'text' => 'Listado de Vencidos',
-                         #'url'  => '#',
-                       # 'can' => 'admin.pos.index',
-                        'route'  => 'vencidos',
-                    ],[
-                        'text' => 'Listado de pendientes',
-                         #'url'  => '#',
-                       # 'can' => 'admin.pos.index',
-                        'route'  => 'pendientes',
-                    ],
+                    'text' => 'Listado de Socios',
+                    #'url'  => '#',
+                    # 'can' => 'admin.pos.index',
+                    #'route' => 'socios',
                 ]
-                ],
+            ]
+        ],
+        /*    [
+        'text' => 'Ventas',
+        'icon' => 'fas fa-fw fa-share',
+        'submenu' => [
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+        'text' => 'Hacer Venta',
+        #'url'  => '#',
+        # 'can' => 'admin.pos.index',
+        'route' => 'pos',
+        ],
+        [
+        'text' => 'Reporte por fechas',
+        #'url'  => '#',
+        # 'can' => 'admin.pos.index',
+        'route' => 'pos-report',
+        ],
+        ]
+        ],
+        [
+        'text' => 'Créditos',
+        'icon' => 'fas fa-fw fa-share',
+        'submenu' => [
+        [
+        'text' => 'Listado de Vencidos',
+        #'url'  => '#',
+        # 'can' => 'admin.pos.index',
+        'route' => 'vencidos',
+        ],
+        [
+        'text' => 'Listado de pendientes',
+        #'url'  => '#',
+        # 'can' => 'admin.pos.index',
+        'route' => 'pendientes',
+        ],
+        ]
+        ],
+        [
+        'text' => 'pages',
+        'url' => 'admin/pages',
+        'icon' => 'far fa-fw fa-file',
+        'label' => 4,
+        'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+        'text' => 'profile',
+        'url' => 'admin/settings',
+        'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        'text' => 'change_password',
+        'url' => 'admin/settings',
+        'icon' => 'fas fa-fw fa-lock',
+        ],*/
         [
-            'text'    => 'Administrador',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Administrador',
+            'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
                     'text' => 'Categorias',
-                     #'url'  => '#',
+                    #'url'  => '#',
                     'can' => 'admin.categories.index',
-                    'route'  => 'admin.categories.index',
+                    'route' => 'admin.categories.index',
                 ],
                 [
                     'text' => 'Productos',
-                     #'url'  => '#',
+                    #'url'  => '#',
                     'can' => 'admin.products.index',
-                    'route'  => 'admin.products.index',
+                    'route' => 'admin.products.index',
                 ],
                 [
                     'text' => 'Roles',
-                     #'url'  => '#',
+                    #'url'  => '#',
                     'can' => 'admin.roles.index',
-                    'route'  => 'admin.roles.index',
+                    'route' => 'admin.roles.index',
                 ],
                 [
-                    'text'    => 'Users',
+                    'text' => 'Users',
                     'can' => 'admin.users.index',
-                    'route'  => 'admin.users.index',
+                    'route' => 'admin.users.index',
 
 
                 ],
                 [
-                    'text'    => 'Clientes',
+                    'text' => 'Clientes',
                     'can' => 'admin.clients.index',
-                    'route'  => 'admin.clients.index',
+                    'route' => 'admin.clients.index',
 
 
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Socios',
+                    'can' => 'admin.members.index',
+                    'route' => 'admin.members.index',
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        /*['header' => 'labels'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+        'text' => 'important',
+        'icon_color' => 'red',
+        'url' => '#',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+        'text' => 'warning',
+        'icon_color' => 'yellow',
+        'url' => '#',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        'text' => 'information',
+        'icon_color' => 'cyan',
+        'url' => '#',
+        ],*/
     ],
 
     /*
