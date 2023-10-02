@@ -20,6 +20,9 @@
             </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        @if(count($socios) == 0)
+                        <h3><span class="text-red">No es Socio</span></h3>
+                    @else
                         <table class="table table-bordered table-stripe mt-1">
                             <thead class="text-white" style="background:#3b3f5c;">
                                 <tr>
@@ -32,6 +35,7 @@
                                     <th class="table-th text-white">Actions</th>
                                 </tr>
                             <tbody>
+
                                 @foreach ($socios as $socio)
 
 
@@ -79,6 +83,7 @@
                             </thead>
                         </table>
                       {{$socios->links()}}
+                      @endif
                     </div>
                 </div>
             </div>
