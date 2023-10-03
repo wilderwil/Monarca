@@ -27,10 +27,13 @@ class Members extends Component
     {
 
         if (strlen($this->search) > 0) {
-            $socios = Member::where('cedula', 'like', '%' . $this->search . '%')->
-                orWhere('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+            /* $socios = Member::where('cedula', 'like', '%' . $this->search . '%')->
+            orWhere('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);*/
+            $socios = Member::where('cedula', '=', $this->search)->
+                orWhere('name', '=', $this->search)->paginate($this->pagination);
         } else {
-            $socios = Member::orderBy('id', 'desc')->paginate($this->pagination);
+            #$socios = Member::orderBy('id', 'desc')->paginate($this->pagination);
+            $socios = [];
         }
 
         return view('livewire.member.members', compact('socios'));
@@ -102,7 +105,7 @@ class Members extends Component
             'email' => $this->email,
             'cel' => $this->cel,
             'member_type' => $this->member_type,
-            'saldo' => $this->saldo,
+            # 'saldo' => $this->saldo,
             'accion' => $this->accion,
 
         ]);
@@ -178,7 +181,7 @@ class Members extends Component
             'email' => $this->email,
             'cel' => $this->cel != '',
             'member_type' => $this->member_type,
-            'saldo' => $this->saldo,
+            # 'saldo' => $this->saldo,
             'accion' => $this->accion
 
         ]);
