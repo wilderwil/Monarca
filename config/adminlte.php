@@ -323,60 +323,60 @@ return [
                 ]
             ]
         ],
-        /*    [
-        'text' => 'Ventas',
-        'icon' => 'fas fa-fw fa-share',
-        'submenu' => [
         [
-        'text' => 'Hacer Venta',
-        #'url'  => '#',
-        # 'can' => 'admin.pos.index',
-        'route' => 'pos',
+            'text' => 'Ventas',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Hacer Venta',
+                    #'url'  => '#',
+                    'can' => 'admin.pos.index',
+                    'route' => 'pos',
+                ],
+                [
+                    'text' => 'Reporte por fechas',
+                    #'url'  => '#',
+                    'can' => 'admin.pos.index',
+                    'route' => 'pos-report',
+                ],
+            ]
         ],
         [
-        'text' => 'Reporte por fechas',
-        #'url'  => '#',
-        # 'can' => 'admin.pos.index',
-        'route' => 'pos-report',
-        ],
-        ]
-        ],
-        [
-        'text' => 'Créditos',
-        'icon' => 'fas fa-fw fa-share',
-        'submenu' => [
-        [
-        'text' => 'Listado de Vencidos',
-        #'url'  => '#',
-        # 'can' => 'admin.pos.index',
-        'route' => 'vencidos',
-        ],
-        [
-        'text' => 'Listado de pendientes',
-        #'url'  => '#',
-        # 'can' => 'admin.pos.index',
-        'route' => 'pendientes',
-        ],
-        ]
-        ],
-        [
-        'text' => 'pages',
-        'url' => 'admin/pages',
-        'icon' => 'far fa-fw fa-file',
-        'label' => 4,
-        'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-        'text' => 'profile',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-        'text' => 'change_password',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-fw fa-lock',
-        ],*/
+            'text' => 'Créditos',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Listado de Vencidos',
+                    #'url'  => '#',
+                    'can' => 'admin.pos.index',
+                    'route' => 'vencidos',
+                ],
+                [
+                    'text' => 'Listado de pendientes',
+                    #'url'  => '#',
+                    'can' => 'admin.pos.index',
+                    'route' => 'pendientes',
+                ],
+            ]
+        ], /*
+         [
+         'text' => 'pages',
+         'url' => 'admin/pages',
+         'icon' => 'far fa-fw fa-file',
+         'label' => 4,
+         'label_color' => 'success',
+         ],
+         ['header' => 'account_settings'],
+         [
+         'text' => 'profile',
+         'url' => 'admin/settings',
+         'icon' => 'fas fa-fw fa-user',
+         ],
+         [
+         'text' => 'change_password',
+         'url' => 'admin/settings',
+         'icon' => 'fas fa-fw fa-lock',
+         ],*/
         [
             'text' => 'Administrador',
             'icon' => 'fas fa-fw fa-share',
